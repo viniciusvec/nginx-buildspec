@@ -15,8 +15,11 @@ phases:
       - cp /var/www/html/index*.html /var/www/html/index.html
   post_build:
     commands:
-      - echo Configuring NGINX
-
+      - echo Configuring NGINX - variables
+      - echo name- CONTAINER_NAME
+      - echo imageUri- $REPOSITORY_URI
+      - printf '[{"name":"$CONTAINER_NAME","imageUri":"$REPOSITORY_URI"}]' > imagedefinitions.json
 artifacts:
   files:
+    - imagedefinitions.json
     - /var/www/html/index.html
